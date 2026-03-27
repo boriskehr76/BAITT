@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAITT — Behaviour Architecture Innovation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --green:   #1B4D3A;
+      --nav-bg:  #F2F0E8;
+      --nav-text: #1C1C1A;
+    }
+
+    body {
+      font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: #000;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--nav-bg);
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px;
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .nav-logo-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--nav-text);
+      line-height: 1;
+    }
+
+    .nav-logo-tagline {
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      color: var(--nav-text);
+      opacity: 0.65;
+      line-height: 1;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 38px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.13em;
+      color: var(--nav-text);
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.6;
+    }
+
+    .nav-cta {
+      text-decoration: none;
+      background: var(--green);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.11em;
+      padding: 13px 26px;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.85;
+    }
+
+    /* ─── HERO ────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Rotating sky — oversized so corners stay filled during rotation */
+    .sky-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 160vmax;
+      height: 160vmax;
+      animation: rotateSky 140s linear infinite;
+      /* translate kept inside keyframes so it's always applied */
+    }
+
+    .sky-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @keyframes rotateSky {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* House — PNG alpha channel used directly, no canvas masking */
+    .house-img {
+      position: absolute;
+      bottom: 90px; /* sits just above the bottom bar */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 64%;
+      max-width: 980px;
+      display: block;
+      /* no mix-blend-mode — relies entirely on PNG alpha transparency */
+    }
+
+    /* Headline */
+    .headline {
+      position: absolute;
+      top: 26%;
+      left: 0;
+      padding-left: 13vw;
+      color: #D4D1C6;
+      pointer-events: none;
+    }
+
+    .headline p {
+      font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      font-size: clamp(40px, 5.2vw, 76px);
+      line-height: 1.15;
+    }
+
+    .headline .line-1 {
+      font-weight: 300;
+      color: rgba(200, 197, 188, 0.82);
+      margin-left: 0;
+    }
+
+    .headline .line-2 {
+      font-weight: 400;
+      color: rgba(228, 225, 215, 0.94);
+      margin-left: 1.4vw;
+    }
+
+    .headline .line-3 {
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(228, 225, 215, 0.94);
+      margin-left: 2.8vw;
+    }
+
+    /* ─── BOTTOM BAR ──────────────────────────────────────────── */
+    .bottom-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: var(--green);
+      height: 90px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding: 0 48px;
+    }
+
+    .bottom-bar p {
+      color: #fff;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    .bottom-bar .left-col {
+      font-weight: 500;
+    }
+
+    .bottom-bar .right-col {
+      font-weight: 400;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ──────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-logo">
+      <span class="nav-logo-name">BAITT</span>
+      <span class="nav-logo-tagline">BEHAVIOUR&nbsp;&nbsp;ARCHITECTURE&nbsp;&nbsp;INNOVATION</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#">APPROACH</a></li>
+      <li><a href="#">SERVICES</a></li>
+      <li><a href="#">ABOUT</a></li>
+      <li><a href="#">THINKING</a></li>
+    </ul>
+
+    <a href="#" class="nav-cta">EXPLORE THE MODEL</a>
+  </nav>
+
+  <!-- ─── HERO ──────────────────────────────────────────────── -->
+  <section class="hero">
+
+    <!-- Layer 1: rotating night sky -->
+    <div class="sky-wrap">
+      <img src="images/new_night_sky.png" alt="">
+    </div>
+
+    <!-- Layer 2: house — PNG alpha transparency, no canvas masking -->
+    <img src="images/tr_house_night.png" class="house-img" alt="">
+
+    <!-- Layer 3: headline -->
+    <div class="headline">
+      <p class="line-1">Wicked problems</p>
+      <p class="line-2">don&#8217;t yield to</p>
+      <p class="line-3"><em>linear process.</em></p>
+    </div>
+
+    <!-- Layer 4: bottom bar -->
+    <div class="bottom-bar">
+      <p class="left-col">We orbit complex problems until the right<br>intervention becomes obvious.</p>
+      <p class="right-col">BAITT is a behavior-led transformation consultancy working at<br>the intersection of environment, technology, and human psychology.</p>
+    </div>
+
+  </section>
+
+</body>
+</html>
